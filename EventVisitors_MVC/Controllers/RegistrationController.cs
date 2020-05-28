@@ -27,17 +27,17 @@ namespace EventVisitors_MVC.Controllers
 
             return View();
         }
-
+        
         [HttpPost] //Skickar värderna som användaren skriver in
-        public ActionResult RegistrationUser(RegistrationClass registration)
+        public ActionResult RegistrationUser(ProfilesClass registration)
         {
-            registration.Registration_Role = "Besökare"; // Besökare blir standardroll för alla som registrerar sig
+            registration.Profile_Role = "Besökare"; // Besökare blir standardroll för alla som registrerar sig
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://193.10.202.76/api/visitor");
+                client.BaseAddress = new Uri("http://localhost:19779/api/PostProfile");
 
                 //HTTP POST
-                var postTask = client.PostAsJsonAsync("/PostVisitor", registration); // Kolla med grupp1 att det är rätt metod
+                var postTask = client.PostAsJsonAsync("PostProfile", registration); // Kolla med grupp1 att det är rätt metod
                 postTask.Wait();
 
                 var result = postTask.Result;

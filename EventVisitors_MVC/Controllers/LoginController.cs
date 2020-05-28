@@ -22,6 +22,8 @@ namespace EventVisitors_MVC.Controllers
             return View();
         }
 
+        /*
+
         //Skickar värderna som användaren skriver in
         [HttpPost] 
         public ActionResult LoginUser(RegistrationClass inlogg)
@@ -46,6 +48,6 @@ namespace EventVisitors_MVC.Controllers
             }
 
 
-        }
+        } */
     }
 }
