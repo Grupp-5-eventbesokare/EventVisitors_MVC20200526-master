@@ -34,15 +34,16 @@ namespace EventVisitors_MVC.Controllers
             registration.Profile_Role = "Besökare"; // Besökare blir standardroll för alla som registrerar sig
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:19779/api/PostProfile");
+                client.BaseAddress = new Uri("http://193.10.202.76/api/");
 
                 //HTTP POST
-                var postTask = client.PostAsJsonAsync("PostProfile", registration); // Kolla med grupp1 att det är rätt metod
+                var postTask = client.PostAsJsonAsync("visitor", registration); // Kolla med grupp1 att det är rätt metod
                 postTask.Wait();
-
-                var result = postTask.Result;
+                var result = postTask.Result.Id;
                 if (result.IsSuccessStatusCode)
                 {
+                    registration.Profile_User_Id = result;
+                    saveProfile //Kalla på metoden
                     return RedirectToAction("LoginUser", "Login");
                 }
                 ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
@@ -51,6 +52,12 @@ namespace EventVisitors_MVC.Controllers
             }
 
             
+        }
+
+        private void saveProfile(ProfilesClass NewProfile)
+        {
+
+
         }
     }
 }
